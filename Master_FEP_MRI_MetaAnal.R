@@ -1,68 +1,63 @@
-########################## MASTER ########################## 
+########################################################################################
+#                                                                                      #
+# Master_FEP_MRI_MetaAnal.R from Blackman et al                                        #
+#                                                                                      #
+# "How command are neuroradiological abnormalities in first-episode psychosis?         #
+#  A meta-analysis of prevalence"                                                      #
+#                                                                                      #
+########################################################################################
 
-# see notes files regarding:
+#
+# This script loads the relevant libraries, defines key functions, and executes the
+# subscripts.
+#
 
-########################## 
-#remove history 
+# The following line will clear all objects from memory. Useful for a 'fresh start' when
+# debugging but not necessary for the script to run
 rm(list= ls()) 
 
-##########################  packages ###########################
+# The following line clears all the plots from RStudio if this script is being run inside it
+# Useful for similar 'fresh start' reasons
+dev.off(dev.list()["RStudioGD"])
 
-require("meta") # for meta analysis
-require("metafor") # for meta analysis
-require("readxl")# for reading excel documents
-require("skimr") # for summary
-require("tidyverse") # multiple packages, inc ggplots2
-require("xlxs") # for reading excel documents
-require("lubridate") # dealing with dates
-require("MASS") # Functions and datasets to support "Modern Applied Statistics with S
-require("janitor") # cleaning data
-require("devtools") # to be able to download packages in development:
-require("lme4") #linear model 4, required for meta analysis
-require("expss") #Tables, Labels and Some Useful Functions from Spreadsheets (eg excel and SPSS' Statistics)
-require("scales") 
+# Load packages
+#
+library("meta") # for meta analysis
+library("metafor") # for meta analysis
+library("readxl")# for reading excel documents
+library("skimr") # for summary
+library("tidyverse") # multiple packages, inc ggplots2
+library("xlxs") # for reading excel documents
+library("lubridate") # dealing with dates
+library("MASS") # Functions and datasets to support "Modern Applied Statistics with S
+library("janitor") # cleaning data
+library("devtools") # to be able to download packages in development:
+library("lme4") #linear model 4, required for meta analysis
+library("expss") #Tables, Labels and Some Useful Functions from Spreadsheets (eg excel and SPSS' Statistics)
+library("scales") 
 
+# Ensure names map to explicit package functions and are not overwritten
+#
+escalc <- metafor::escalc
+rma <- metafor::rma
+transf.ipft.hm <- metafor::transf.ipft.hm
+forest <- metafor::forest
+expss <- expss::count_if
+funnel <- metafor::funnel
 
-########################## 
-#pre set packages for functions
-escalc<-metafor::escalc
-rma<-metafor::rma
-transf.ipft.hm<-metafor::transf.ipft.hm
-forest<-metafor::forest
-expss<-expss::count_if
-funnel<-metafor::funnel
+# Load data
+#
+data_all <- read_xlsx("FEP_MRI_data.xlsx", sheet = "sheet1")
 
-########################## data loading ###########################
+# Execute subscripts
+#
+source("meta_mri_processing.R")
+source("meta_mri_descriptive.R", echo = TRUE)
+source("meta_mri_analysis_prev.R")
+source("meta_mri_analysis_prev_subtype.R") 
+source("meta_mri_visualization.R")
 
-data_all <-read_xlsx("FEP_MRI_data.xlsx",sheet = "sheet1")
-# search_data<-read_xlsx("FEP_MRI_data.xlsx",sheet = "sheet2")
+# The following is a script that includes additional visualizations not included in the publication but useful
+# for the open archive
 
-###options (commented out)
-
-##skim data to check missing values: 
-#view(skim(data))
-
-## to list files in director:
-#list.files () # files in directory
-
-# to glimpse data: 
-# view(glimpse(data))
-
-#structure  of each variable:
-# str(data)
-
-# summary of variables (for numeric values descriptive stats): 
-# summary(data)
-
-########################## source scripts ###########################
-
-source("meta_mri_processing.r") # 
-source("meta_mri_descriptive.r")
-source("meta_mri_analysis_prev.r") #  
-source("meta_mri_analysis_prev_subtype.r") 
-source("meta_mri_visualization.r") #
-
-
-
-
-
+# source("meta_mri_visualization_addendum.R", echo=TRUE)
