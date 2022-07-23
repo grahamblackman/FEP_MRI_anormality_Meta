@@ -1,121 +1,151 @@
-############# Analysis script###############
-# to do:
-# check if any cases of 'previous antipsychotic exposure'
+########################################################################################
+#                                                                                      #
+# meta_mri_descriptive.R from Blackman et al                                           #
+#                                                                                      #
+# "How command are neuroradiological abnormalities in first-episode psychosis?         #
+#  A meta-analysis of prevalence"                                                      #
+#                                                                                      #
+########################################################################################
 
-# #notes:
-#  data_all = includes zanetti et al
-#  data = excludes zanetti et al
+#
+# This script calculates and displays descriptive statistics
+#
 
-############## descriptive analysis ############## 
+# Define how many studies were identified in entire database and how many were included in full review
+tot_database <- 1682 # to update
+sprintf("Total studies identified in database: %s", tot_database)
 
-# databse search 
+tot_full_review <- 100  # to update
+sprintf("Total studies included in review: %s", tot_database)
 
-tot_database<-1682 # to update
-tot_full_review<-100  # to update
+# Descriptive statistics relating to studies
+#
 
-# studies included
+# Calculate earliest and latest data of publication for included studies
+max_study_year <- max(data_all$year, na.rm=TRUE)
+sprintf("Latest publication year of included study: %s", max_study_year)
 
-#earliest and latest study included
-max_study_year<-max(data_all$year,na.rm=TRUE)
-min_study_year<-min(data_all$year,na.rm=TRUE)
+min_study_year <- min(data_all$year, na.rm=TRUE)
+sprintf("Earliest publication year of included study: %s", min_study_year)
 
-#number of studies  
-#FEP patients: any abnorm
-tot_study_fep<-sum(complete.cases(data_all$fep_total))
+# Calculate total number of studies reporting first-episode psychosis patients with any abnormality
+tot_study_fep <- sum(complete.cases(data_all$fep_total))
+sprintf("Total number of studies reporting first-episode psychosis patients with any abnormality: %s", tot_study_fep)
 
-#FEP patients: clin rel abnorm
-tot_study_cr_fep<-sum(complete.cases(data_cr$fep_total)) # #number of studies reporting clinical relevant findings
+# Calculate total number of number of studies reporting first-episode psychosis patients with any clinically relevant abnormality
+tot_study_cr_fep <- sum(complete.cases(data_cr$fep_total))
+sprintf("Total number of number of studies reporting first-episode psychosis patients with any clinically relevant abnormality: %s", tot_study_cr_fep)
 
-#pooled sample 
-#FEP patients: any abnorm
-tot_sam_fep<-sum(data_all$fep_total,na.rm=TRUE)
-#FEP patients: clin rel abnorm
-tot_sam_cr_fep<-sum(data_cr$fep_total,na.rm=TRUE)
+# Descriptive statistics relating to data reported in studies
+#
 
-#minimum and maximum sample size
-sam_size_min<-min(data_all$fep_total,na.rm=TRUE)
-sam_size_max<-max(data_all$fep_total,na.rm=TRUE)
+# Pooled sample 
 
-#minimum and maximum mean age per study
-study_age_min<-min(data_all$age_fep,na.rm=TRUE)
-study_age_max<-max(data_all$age_fep,na.rm=TRUE)
+# Calculate total number of first-episode psychosis patients with any abnormality
+tot_sam_fep <- sum(data_all$fep_total, na.rm=TRUE)
+sprintf("Total number of first-episode psychosis patients with any abnormality: %s", tot_sam_fep)
 
-#number of studies with age reported
-tot_study_age<-sum(complete.cases(data_all$age_fep))
+# Calculate total number of first-episode psychosis patients with any clinically relevant abnormality
+tot_sam_cr_fep <- sum(data_cr$fep_total, na.rm=TRUE)
+sprintf("Total number of first-episode psychosis patients with any clinically relevant abnormality: %s", tot_sam_cr_fep)
 
-#number of studies with age reported
-tot_study_age<-sum(complete.cases(data_all$age_fep))
+# Calculate minimum and maximum sample size reported across included studies
+sam_size_min <- min(data_all$fep_total, na.rm=TRUE)
+sprintf("Minimum sample size reported in included studies: %s", sam_size_min)
+sam_size_max <- max(data_all$fep_total, na.rm=TRUE)
+sprintf("Maximum sample size reported in included studies: %s", sam_size_max)
 
-#proportion female 
-prop_fem_fep_min<-min(data_all$female_fep/data_all$fep_total,na.rm=TRUE)
-prop_fem_fep_max<-max(data_all$female_fep/data_all$fep_total,na.rm=TRUE)
+# Minimum and maximum age across studies
+study_age_min <- min(data_all$age_fep, na.rm=TRUE)
+sprintf("Minimum age of patient reported in included studies: %s", study_age_min)
+study_age_max <- max(data_all$age_fep, na.rm=TRUE)
+sprintf("Maximum age of patient reported in included studies: %s", study_age_max)
+study_age_mean <- mean(data_all$age_fep, na.rm=TRUE)
+sprintf("Mean age of patient reported in included studies: %.2f", study_age_mean)
 
-# psychosis duration
-tot_study_psych_dur<-sum(complete.cases(data_all$psychosis_duration_wks))
-psych_dur_min<-min(data_all$psychosis_duration_wks,na.rm=TRUE)
-psych_dur_max<-max(data_all$psychosis_duration_wks,na.rm=TRUE)
+# Number of studies with age reported
+tot_study_age <- sum(complete.cases(data_all$age_fep))
+sprintf("Number of studies with age reported: %s", tot_study_age)
 
-#number of studies with HC group
-hea_con<-sum(complete.cases(data_all$hc_total))
+# Proportion of female participants
+prop_fem_fep_min <- min(data_all$female_fep/data_all$fep_total,na.rm=TRUE)
+sprintf("Minimum proportion of female participants across studies: %.2f", prop_fem_fep_min)
+prop_fem_fep_max <- max(data_all$female_fep/data_all$fep_total,na.rm=TRUE)
+sprintf("Maximum proportion of female participants across studies: %.2f", prop_fem_fep_max)
 
-# study continent
-study_continent<-count(data_all,study_continent)
-tot_aus<-study_continent[1,2]
-tot_eur<-study_continent[2,2]
-tot_nam<-study_continent[3,2]
-tot_sam<-study_continent[4,2]
+# Psychosis duration
+# Total number of studies reporting duration of psychosis
+tot_study_psych_dur <- sum(complete.cases(data_all$psychosis_duration_wks))
+sprintf("Total number of studies reporting duration of psychosis: %s", tot_study_psych_dur)
 
-# screening of patients
-# studies which screened out possible organic psychosis
-study_screen<- count_if("yes",data_all$study_screen_positive_exclude)
-screen_exam<- count_if("yes",data_all$screen_exam)
-screen_history<- count_if("yes",data_all$screen_history)
+psych_dur_min <- min(data_all$psychosis_duration_wks, na.rm=TRUE)
+sprintf("Minimum psychosis duration in weeks across studies: %.2f", psych_dur_min)
+psych_dur_max <- max(data_all$psychosis_duration_wks, na.rm=TRUE)
+sprintf("Maximum psychosis duration in weeks across studies: %.2f", psych_dur_max)
 
-# recruitment:
-recruitment<-count(data_all,recruitment)
-recruit_clin<-recruitment[1,2]
-recruit_res<-recruitment[2,2]
+# Number of studies with healthy control group
+hea_con <- sum(complete.cases(data_all$hc_total))
+sprintf("Total number of studies with healthy control group: %s", hea_con)
 
-#antipsychotic exposure
-antipsych_current_stat<-sum(complete.cases(as.numeric(data_all$current_AP_exposure)))
-antipsych_prop_min <- min(data_all$current_AP_exposure/data_all$fep_total,na.rm=TRUE)
-antipsych_prop_max <- max(data_all$current_AP_exposure/data_all$fep_total,na.rm=TRUE)
+# Calculate and show number of studies by continent
+study_continent <- count(data_all, study_continent)
+study_continent
+tot_aus <- study_continent[1,2]
+tot_eur <- study_continent[2,2]
+tot_nam <- study_continent[3,2]
+tot_sam <- study_continent[4,2]
 
-## antipsychotic exposure [temporarily commented out pending creation of new var]
-# prop_antipsy_expo_min<-min(data_all$prop_current_AP_expo)
-# prop_antipsy_expo_max<-max(data_all$prop_current_AP_expo)
+# Descriptive statisics about screening of patients
+#
 
-# # antipsychotic duration 
-# [insufficient data]
+# Calculate number of studies which screened out possible organic psychosis
+study_screen <- count_if("yes", data_all$study_screen_positive_exclude)
+sprintf("Total number of studies that screened out patients based on ?QUERY screening tool: %s", study_screen)
+screen_exam <- count_if("yes", data_all$screen_exam)
+sprintf("Total number of studies that screened out patients based on ?QUERY clinical examination: %s", screen_exam)
+screen_history <- count_if("yes", data_all$screen_history)
+sprintf("Total number of studies that screened out patients based on history: %s", screen_history)
 
-#number of studies reporting field strength
-scan_field<-sum(complete.cases(data_all$scan_field))
+# Calculate and show recruitment pathway
+recruitment <- count(data_all,recruitment)
+recruitment
+recruit_clin <- recruitment[1,2]
+recruit_res <- recruitment[2,2]
 
-# #frequency counts [to complete]
-scan_field_strength_onepointfive_T<- count_if("1.5",data_all$scan_field)
-scan_field_strength_three_T<- count_if("3",data_all$scan_field)
+# Calculate antipsychotic exposure
+antipsych_current_stat <- sum(complete.cases(as.numeric(data_all$current_AP_exposure)))
+sprintf("Total number of studies that ?QUERY report antipsychotic exposure: %s", antipsych_current_stat)
 
-#rater type [completed - MTD]
-scan_rep_neurorad <- count_if("1", data_all$neurorad_binary)
-scan_rep_rad <- count_if("1", data_all$rad_binary)
-scan_rep_neuro <- count_if("1", data_all$neuro_bin)
-scan_rep_psych <- count_if("1", data_all$psyc_binary)
-scan_rep_unspec <- count_if("nr", data_all$rater)
+antipsych_prop_min <- min(data_all$current_AP_exposure/data_all$fep_total, na.rm=TRUE)
+sprintf("Minimum proportion of patients with antipsychotic exposure across studies: %.2f", antipsych_prop_min)
+antipsych_prop_max <- max(data_all$current_AP_exposure/data_all$fep_total, na.rm=TRUE)
+sprintf("Maximum proportion of patients with antipsychotic exposure across studies: %.2f", antipsych_prop_max)
 
-#rater type (binary) 
-scan_rep_bin_rad <- count_if("y", data_all$all_rater_radiol_bin)
-scan_rep_bin_nonrad <- count_if("n", data_all$all_rater_radiol_bin)
-scan_rep_bin_notreported <- count_if("nr", data_all$all_rater_radiol_bin)
+# Number of studies reporting field strength
+scan_field <- sum(complete.cases(data_all$scan_field))
+sprintf("Total number of studies reporting MRI field strength: %s", scan_field)
 
-# #blinding 
-scan_blind<-count_if("yes", data_all$scan_blind)
+# Number of studies reporting each reported field strength of FMRI
+sprintf("Number of studies reporting each reported field strength of FMRI:")
+count(data_all, scan_field)
 
-# scan_blind<-count(data_all,scan_field)
-# scan_blind_y<-scan_blind[x,x]
+# Scan-rater type by number of studies
+sprintf("Scan-rater type in each type of study (nr = not specified):")
+count(data_all, rater)
+
+# Number of studies reporting blinding for scan-raters
+scan_blind <- count_if("yes", data_all$scan_blind)
+sprintf("Number of studies reporting blinding for raters: %s", scan_blind)
 
 ## Quality assessment and risk of bias 
-qual_min<-min(data_all$quality_assess_MTD)
-qual_max<-max(data_all$quality_assess_MTD)
-bias_low<-count_if(7 %thru% 10, data_all$quality_assess_MTD)
-bias_med<-count_if(4 %thru% 6, data_all$quality_assess_MTD)
-bias_high<-count_if(0 %thru% 3, data_all$quality_assess_MTD)
+qual_min <- min(data_all$quality_assess_MTD)
+sprintf("Lowest quality score scross studies: %s", qual_min)
+qual_max <- max(data_all$quality_assess_MTD)
+sprintf("Highest quality score scross studies: %s", qual_max)
+
+bias_low <- count_if(7 %thru% 10, data_all$quality_assess_MTD)
+sprintf("Number of studies scoring in the low range for bias: %s", bias_low)
+bias_med <- count_if(4 %thru% 6, data_all$quality_assess_MTD)
+sprintf("Number of studies scoring in the medium range for bias: %s", bias_med)
+bias_high <- count_if(0 %thru% 3, data_all$quality_assess_MTD)
+sprintf("Number of studies scoring in the high range for bias: %s", bias_high)
