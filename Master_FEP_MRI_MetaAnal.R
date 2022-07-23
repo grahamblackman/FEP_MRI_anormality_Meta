@@ -2,7 +2,7 @@
 #                                                                                      #
 # Master_FEP_MRI_MetaAnal.R from Blackman et al                                        #
 #                                                                                      #
-# "How command are neuroradiological abnormalities in first-episode psychosis?         #
+# "How common are neuroradiological abnormalities in first-episode psychosis?         #
 #  A meta-analysis of prevalence"                                                      #
 #                                                                                      #
 ########################################################################################
@@ -31,7 +31,7 @@ library("xlxs") # for reading excel documents
 library("lubridate") # dealing with dates
 library("MASS") # Functions and datasets to support "Modern Applied Statistics with S
 library("janitor") # cleaning data
-library("devtools") # to be able to download packages in development:
+library("devtools") # to download packages in development
 library("lme4") #linear model 4, required for meta analysis
 library("expss") #Tables, Labels and Some Useful Functions from Spreadsheets (eg excel and SPSS' Statistics)
 library("scales") 
