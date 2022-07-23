@@ -2,7 +2,7 @@
 #                                                                                      #
 # meta_mri_processing.R from Blackman et al                                            #
 #                                                                                      #
-# "How command are neuroradiological abnormalities in first-episode psychosis?         #
+# "How common are neuroradiological abnormalities in first-episode psychosis?         #
 #  A meta-analysis of prevalence"                                                      #
 #                                                                                      #
 ########################################################################################
@@ -14,7 +14,7 @@
 
 ####### preparing data for analyses ######
 
-# Create 'data' dataframe that excludes Zanetti study
+# Create 'data' dataframe that excludes Zanetti et al study (study only reports white matter abnormalities)
 data <- data_all %>%
   filter(author!='Zanetti')
 
@@ -41,20 +41,20 @@ data_all$neurorad_binary <- as.character(data_all$neurorad_binary)
 data$female_fep <- as.numeric(data$female_fep)
 data_all$female_fep <- as.numeric(data_all$female_fep)
 
-# Code age_under_35 as numeric
+# Code 'age under 35' as numeric
 data$age_under_35 <- as.numeric(data$age_under_35)
 data_all$age_under_35 <- as.numeric(data_all$age_under_35)
 
-# Code current_AP_exposure as numeric
+# Code 'current AntiPsychotic exposure' as numeric
 data$current_AP_exposure <- as.numeric(data$current_AP_exposure)
 data_all$current_AP_exposure <- as.numeric(data_all$current_AP_exposure)
 
-# Code whole_brain_binary as numeric
+# Code 'whole brain evaluated' as numeric
 data$whole_brain_binary <- as.numeric(data$whole_brain_binary)
 data_all$whole_brain_binary <- as.numeric(data_all$whole_brain_binary)
 
 # Calculate variable containing number of normal scans for...
-#
+
 # First episode psychosis patients
 data <- data %>%
   mutate("fep_normal" = fep_total - fep_abnormal)
@@ -64,9 +64,9 @@ data <- data %>%
   mutate("hc_normal" = hc_total - hc_abnormal)
 
 # Create dataframes with subsets of studies
-#
 
-# Create data_cr dataframe that only has studies reporting clinically relevant abnormalities...
+
+# Create dataframe 'data_cr' that includes only  studies reporting clinically relevant abnormalities...
 data_cr <- data %>%
   filter(include_CR == "yes")
 
@@ -77,10 +77,10 @@ data_cr$fep_cr_abnormal <- as.numeric(data_cr$fep_cr_abnormal)
 data_subtype <- data %>%
   filter(include_subtype == "yes")
 
-# Create data_subtype_all dataframe with only studies reporting WM abnormalities [inc Zannetti et al]
+# Create data_subtype_all dataframe with studies reporting anatomical subtypes [inc Zannetti et al]
 data_subtype_all <- data_all %>%
   filter(include_subtype == "yes")
 
-# Create data_cr_subtype dataframe with only studies reporting subtype abnormalities
+# Create data_cr_subtype dataframe with studies reporting anatomical subtypes AND whether abnormalities were clinically relevant
 data_cr_subtype <- data %>%
   filter(include_CR_subtype == "yes")
