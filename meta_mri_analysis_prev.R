@@ -2,7 +2,7 @@
 #                                                                                      #
 # meta_mri_analysis_prev.R from Blackman et al                                         #
 #                                                                                      #
-# "How command are neuroradiological abnormalities in first-episode psychosis?         #
+# "How common are neuroradiological abnormalities in first-episode psychosis?          #
 #  A meta-analysis of prevalence"                                                      #
 #                                                                                      #
 ########################################################################################
@@ -20,7 +20,7 @@
 #  How to Conduct a Meta-Analysis of Proportions in R: A Comprehensive Tutorial
 
 # other key resources:
-#  "Conducting Meta-Analyses in R with the metafor Package, Wolfgang Viechtbauer" (saved as PDF)
+#  "Conducting Meta-Analyses in R with the metafor Package, Wolfgang Viechtbauer" 
 #  cran.r-project.org/web/packages/meta/meta.pdf
 #  https://rpubs.com/pekong/532068
 #  rdocumentation: metaprop
@@ -54,6 +54,8 @@
 #  then pool the individual effect sizes and their sampling variances based on
 #  the inverse variance method with the rma() function. 
 
+###################
+
 # Calculate effect sizes and sampling variance for proportion of those with any abnormality compared to
 # total sample using Freeman-Tukey double arcsine transformed proportion
 ies_da_fep_ab <- escalc(xi = fep_abnormal, ni = fep_total, data = data, measure="PFT", add=0) 
@@ -72,7 +74,6 @@ pes_da_fep_ab <- rma(yi, vi, data = ies_da_fep_ab, method = "DL", level = 95) # 
 pes_da_fep_cr_ab <- rma(yi, vi, data = ies_da_fep_cr_ab, method = "DL", level = 95) # clinically relevant abnormalities
 
 # Convert to non-transformed measurement scale (i.e., proportion) and yield a true summary proportion
-#
 
 # Any abnormality
 pes_fep_ab <- stats::predict(pes_da_fep_ab, transf = transf.ipft.hm, targ=list(ni = data$fep_total)) #class: list.rma
