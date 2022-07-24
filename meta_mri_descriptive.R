@@ -2,7 +2,7 @@
 #                                                                                      #
 # meta_mri_descriptive.R from Blackman et al                                           #
 #                                                                                      #
-# "How command are neuroradiological abnormalities in first-episode psychosis?         #
+# "How common are neuroradiological abnormalities in first-episode psychosis?         #
 #  A meta-analysis of prevalence"                                                      #
 #                                                                                      #
 ########################################################################################
@@ -11,17 +11,11 @@
 # This script calculates and displays descriptive statistics
 #
 
-# Define how many studies were identified in entire database and how many were included in full review
-tot_database <- 1682 # to update
-sprintf("Total studies identified in database: %s", tot_database)
-
-tot_full_review <- 100  # to update
-sprintf("Total studies included in review: %s", tot_database)
 
 # Descriptive statistics relating to studies
 #
 
-# Calculate earliest and latest data of publication for included studies
+# Calculate earliest and latest publication for included studies
 max_study_year <- max(data_all$year, na.rm=TRUE)
 sprintf("Latest publication year of included study: %s", max_study_year)
 
@@ -36,8 +30,7 @@ sprintf("Total number of studies reporting first-episode psychosis patients with
 tot_study_cr_fep <- sum(complete.cases(data_cr$fep_total))
 sprintf("Total number of number of studies reporting first-episode psychosis patients with any clinically relevant abnormality: %s", tot_study_cr_fep)
 
-# Descriptive statistics relating to data reported in studies
-#
+# Descriptive statistics relating to data reported in studie
 
 # Pooled sample 
 
@@ -96,15 +89,14 @@ tot_nam <- study_continent[3,2]
 tot_sam <- study_continent[4,2]
 
 # Descriptive statisics about screening of patients
-#
 
-# Calculate number of studies which screened out possible organic psychosis
+# Calculate number of studies which screened out cases of possible organic psychosis
 study_screen <- count_if("yes", data_all$study_screen_positive_exclude)
-sprintf("Total number of studies that screened out patients based on ?QUERY screening tool: %s", study_screen)
+sprintf("Total number of studies that screened out patients based on clinical exam and/or psych assessment: %s", study_screen)
 screen_exam <- count_if("yes", data_all$screen_exam)
-sprintf("Total number of studies that screened out patients based on ?QUERY clinical examination: %s", screen_exam)
+sprintf("Total number of studies that screened out patients based on exam: %s", screen_exam)
 screen_history <- count_if("yes", data_all$screen_history)
-sprintf("Total number of studies that screened out patients based on history: %s", screen_history)
+sprintf("Total number of studies that screened out patients based on psych assessment: %s", screen_history)
 
 # Calculate and show recruitment pathway
 recruitment <- count(data_all,recruitment)
@@ -114,7 +106,7 @@ recruit_res <- recruitment[2,2]
 
 # Calculate antipsychotic exposure
 antipsych_current_stat <- sum(complete.cases(as.numeric(data_all$current_AP_exposure)))
-sprintf("Total number of studies that ?QUERY report antipsychotic exposure: %s", antipsych_current_stat)
+sprintf("Total number of studies that report antipsychotic exposure at time of MRI: %s", antipsych_current_stat)
 
 antipsych_prop_min <- min(data_all$current_AP_exposure/data_all$fep_total, na.rm=TRUE)
 sprintf("Minimum proportion of patients with antipsychotic exposure across studies: %.2f", antipsych_prop_min)
@@ -125,7 +117,7 @@ sprintf("Maximum proportion of patients with antipsychotic exposure across studi
 scan_field <- sum(complete.cases(data_all$scan_field))
 sprintf("Total number of studies reporting MRI field strength: %s", scan_field)
 
-# Number of studies reporting each reported field strength of FMRI
+# Number of studies reporting field strength of FMRI [**to check**]
 sprintf("Number of studies reporting each reported field strength of FMRI:")
 count(data_all, scan_field)
 
@@ -133,9 +125,9 @@ count(data_all, scan_field)
 sprintf("Scan-rater type in each type of study (nr = not specified):")
 count(data_all, rater)
 
-# Number of studies reporting blinding for scan-raters
+# Number of studies where scan-raters were blinded to status
 scan_blind <- count_if("yes", data_all$scan_blind)
-sprintf("Number of studies reporting blinding for raters: %s", scan_blind)
+sprintf("Number of studies where scan-raters were blinded: %s", scan_blind)
 
 ## Quality assessment and risk of bias 
 qual_min <- min(data_all$quality_assess_MTD)
