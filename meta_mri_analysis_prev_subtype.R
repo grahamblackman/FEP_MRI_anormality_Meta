@@ -1,3 +1,21 @@
+########################################################################################
+#                                                                                      #
+# meta_mri_analysis_prev_subtype.R from Blackman et al                                         #
+#                                                                                      #
+# "How common are neuroradiological abnormalities in first-episode psychosis?          #
+#  A meta-analysis of prevalence"                                                      #
+#                                                                                      #
+########################################################################################
+
+#
+# This script calculates the meta analysis of proportions of neuroanatomical subtypes...
+#
+# Note: it uses both rma and metaprop because rma is needed for moderator and leave one out
+#       sensitivity analyses 
+#       
+# ... and Eggers / trim and fill / funnel plot at the end of the script
+#
+
 # meta analysis of subtype of abnormalities
 
 # NB:

@@ -2,7 +2,7 @@
 #                                                                                      #
 # Master_FEP_MRI_MetaAnal.R from Blackman et al                                        #
 #                                                                                      #
-# "How common are neuroradiological abnormalities in first-episode psychosis?         #
+# "How common are neuroradiological abnormalities in first-episode psychosis?          #
 #  A meta-analysis of prevalence"                                                      #
 #                                                                                      #
 ########################################################################################
@@ -10,7 +10,6 @@
 #
 # This script loads the relevant libraries, defines key functions, and executes the
 # subscripts.
-#
 
 # The following line will clear all objects from memory. Useful for a 'fresh start' when
 # debugging but not necessary for the script to run
@@ -62,4 +61,3 @@ source("meta_mri_visualization.R")
 
 # source("meta_mri_visualization_addendum.R", echo=TRUE)
 
-1+1
