@@ -10,10 +10,11 @@
 #
 # This script calculates the meta analysis of proportions of neuroanatomical subtypes...
 #
-# Note: it uses both rma and metaprop because rma is needed for moderator and leave one out
-#       sensitivity analyses 
+# Note:  metaprop and rma functions are used for running meta analysis (rma is needed for moderator and leave one out
+#       sensitivity analyses) 
 #       
 # ... and Eggers / trim and fill / funnel plot at the end of the script
+#
 #
 
 # meta analysis of subtype of abnormalities
@@ -34,7 +35,7 @@
 #ventricular
 pes_fep_ventricular_summary=meta::metaprop(fep_ventricular, fep_total, author_year, data=data_subtype, sm="PFT",
                                            method.tau="DL", method.ci="NAsm")
-#white_matter [include Zannetti]
+#white_matter [including Zannetti et al study]
 pes_fep_white_matter_summary<-meta::metaprop(fep_white_matter, fep_total, author_year, data=data_subtype_all, sm="PFT",
                                              method.tau="DL", method.ci="NAsm")
 #other
@@ -62,7 +63,7 @@ pes_fep_pituitary_summary=meta::metaprop(fep_pituitary, fep_total, author_year, 
 # clinically relevant abnormalities --------------------------------------------------------------------
 
 
-#white_matter [check: inc Zannetti?]
+#white_matter [excludes Zannetti et al as does not report CR abnormalities]
 pes_fep_cr_white_matter_summary<-meta::metaprop(fep_cr_white_matter, fep_total, author_year, data=data_cr_subtype, sm="PFT",
                                              method.tau="DL", method.ci="NAsm")
 #vascular

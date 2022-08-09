@@ -2,7 +2,7 @@
 #                                                                                      #
 # meta_mri_visualization.R from Blackman et al                                         #
 #                                                                                      #
-# "How command are neuroradiological abnormalities in first-episode psychosis?         #
+# "How common are neuroradiological abnormalities in first-episode psychosis?         #
 #  A meta-analysis of prevalence"                                                      #
 #                                                                                      #
 ########################################################################################
@@ -124,8 +124,6 @@ funnel(pes_fep_cr_ab_summary,
        col="black", 
        pooled.totals=FALSE, comb.fixed=FALSE, fs.hetstat=10, print.tau2=TRUE, print.Q=TRUE, print.pval.Q=TRUE, print.I2=TRUE, digits=2, sortvar=precision)
 
-
-############# Forest plots 
 
 ############# abnormality subtype: white matter
 
@@ -507,3 +505,15 @@ leave1out_fep_cr_ab <- forest(metainf(pes_fep_cr_ab_summary,pooled="random",sort
 leave1out_fep_cr_ab <- metainf(pes_fep_cr_ab_summary,pooled="random",sortvar=precision_cr)
 
 forest(leave1out_fep_cr_ab)
+
+########### trim and fill: correcting for publication bias (see Duval and Tweedie, 2000) ########## 
+
+# NB based on transformed data 
+
+trimfill_fep_ab <- trimfill(pes_fep_ab_summary)
+print(trimfill_fep_ab) 
+funnel(trimfill_fep_ab)
+
+trimfill_fep_cr_ab <- trimfill(pes_fep_cr_ab_summary)
+print(trimfill_fep_cr_ab) 
+funnel(trimfill_fep_cr_ab)

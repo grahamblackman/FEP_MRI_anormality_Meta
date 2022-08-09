@@ -10,8 +10,8 @@
 #
 # This script calculates the meta analysis of proportions...
 #
-# Note: it uses both rma and metaprop because rma is needed for moderator and leave one out
-#       sensitivity analyses 
+# Note:  metaprop and rma functions are used for running meta analysis (rma is needed for moderator and leave one out
+#       sensitivity analyses) 
 #       
 # ... and Eggers / trim and fill / funnel plot at the end of the script
 #
@@ -390,14 +390,4 @@ print(eggers_reg_fep_ab)
 eggers_reg_fep_cr_ab <- regtest(pes_da_fep_cr_ab, model="rma", predictor="sei")
 print(eggers_reg_fep_cr_ab)
 
-########### trim and fill  correct for publication bias (Duval and Tweedie, 2000) ########## 
 
-# NB based on transformed data (appears to increase estim prop)
-
-trimfill_fep_ab <- trimfill(pes_fep_ab_summary)
-print(trimfill_fep_ab) 
-funnel(trimfill_fep_ab)
-
-trimfill_fep_cr_ab <- trimfill(pes_fep_cr_ab_summary)
-print(trimfill_fep_cr_ab) 
-funnel(trimfill_fep_cr_ab)
