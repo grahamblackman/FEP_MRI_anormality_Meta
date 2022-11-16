@@ -23,8 +23,9 @@ This repository contains the following files
 3. [meta_mri_descriptive.R](https://github.com/grahamblackman/FEP_MRI_anormality_Meta/blob/main/meta_mri_descriptive.R) - calculates and displays descriptive statistics
 4. [meta_mri_analysis_prev.R](https://github.com/grahamblackman/FEP_MRI_anormality_Meta/blob/main/meta_mri_analysis_prev.R) - calculates the meta analysis of proportions and Eggers / trim and fill / funnel plots
 5. [meta_mri_analysis_prev_subtype.R](https://github.com/grahamblackman/FEP_MRI_anormality_Meta/blob/main/meta_mri_analysis_prev_subtype.R) - calculates the meta analysis of proportions of neuroanatomical subtypes
-6. [meta_mri_visualization.R](https://github.com/grahamblackman/FEP_MRI_anormality_Meta/blob/main/meta_mri_visualization.R) - visualizes the results of the meta-analysis presented in the paper and related analyse
-7. [meta_mri_visualization_addendum.R](https://github.com/grahamblackman/FEP_MRI_anormality_Meta/blob/main/meta_mri_visualization_addendum.R) - additional confirmatory visualizations not included in the publication
+6. [meta_mri_analysis_RR.R](https://github.com/grahamblackman/FEP_MRI_anormality_Meta/blob/main/meta_mri_analysis_RR.R) - calculates meta-analytic risk ratios for differences in abnormalities between FEP sample and healthy controls
+7. [meta_mri_visualization.R](https://github.com/grahamblackman/FEP_MRI_anormality_Meta/blob/main/meta_mri_visualization.R) - visualizes the results of the meta-analysis presented in the paper and related analyse
+8. [meta_mri_visualization_addendum.R](https://github.com/grahamblackman/FEP_MRI_anormality_Meta/blob/main/meta_mri_visualization_addendum.R) - additional confirmatory visualizations not included in the publication
 
 ### Platform and package versions
 
