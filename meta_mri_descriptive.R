@@ -30,17 +30,29 @@ sprintf("Total number of studies reporting first-episode psychosis patients with
 tot_study_cr_fep <- sum(complete.cases(data_cr$fep_total))
 sprintf("Total number of number of studies reporting first-episode psychosis patients with any clinically relevant abnormality: %s", tot_study_cr_fep)
 
-# Descriptive statistics relating to data reported in studie
+# Descriptive statistics relating to data reported in studies
 
 # Pooled sample 
 
-# Calculate total number of first-episode psychosis patients with any abnormality
+# Calculate total number of first-episode psychosis patients assessed for presence of an MRI abnormality
 tot_sam_fep <- sum(data_all$fep_total, na.rm=TRUE)
-sprintf("Total number of first-episode psychosis patients with any abnormality: %s", tot_sam_fep)
+sprintf("Pooled sample of first-episode psychosis patients assessed for any abnormality: %s", tot_sam_fep)
 
-# Calculate total number of first-episode psychosis patients with any clinically relevant abnormality
+# Calculate total number of first-episode psychosis patients assessed for presence of a clinically relevant MRI abnormality
 tot_sam_cr_fep <- sum(data_cr$fep_total, na.rm=TRUE)
-sprintf("Total number of first-episode psychosis patients with any clinically relevant abnormality: %s", tot_sam_cr_fep)
+sprintf("Pooled sample of first-episode psychosis patients assessed for any clinically relevant abnormality: %s", tot_sam_cr_fep)
+
+# Calculate total number of healthy controls assessed for presence of an MRI abnormality
+tot_sam_hc <- sum(data_all$hc_total, na.rm=TRUE)
+sprintf("Pooled sample of healthy controls assessed for any abnormality: %s", tot_sam_hc)
+
+# Calculate total number of first-episode psychosis patients assessed for presence of an MRI abnormality among case-control studies
+tot_sam_fep_cc_studies<- sum(data_all[which(data_all$hc_total>0), 11])
+sprintf("Pooled sample of first-episode psychosis patients assessed for presence of an MRI abnormality among case-control studies: %s", tot_sam_fep_cc_studies)
+
+# Calculate pooled sample (first-episode psychosis patients & healthy control) for presence of an MRI abnormality among case-control studies
+tot_sam_cc_studies<- sum(tot_sam_hc+tot_sam_fep_cc_studies)
+sprintf("Pooled sample of all participants (FEP and HC) assessed for presence of an MRI abnormality among case-control studies: %s", tot_sam_cc_studies)
 
 # Calculate minimum and maximum sample size reported across included studies
 sam_size_min <- min(data_all$fep_total, na.rm=TRUE)
@@ -130,14 +142,14 @@ scan_blind <- count_if("yes", data_all$scan_blind)
 sprintf("Number of studies where scan-raters were blinded: %s", scan_blind)
 
 ## Quality assessment and risk of bias 
-qual_min <- min(data_all$quality_assess_MTD)
+qual_min <- min(data_all$quality_assess)
 sprintf("Lowest quality score scross studies: %s", qual_min)
-qual_max <- max(data_all$quality_assess_MTD)
+qual_max <- max(data_all$quality_assess)
 sprintf("Highest quality score scross studies: %s", qual_max)
 
-bias_low <- count_if(7 %thru% 10, data_all$quality_assess_MTD)
+bias_low <- count_if(7 %thru% 10, data_all$quality_assess)
 sprintf("Number of studies scoring in the low range for bias: %s", bias_low)
-bias_med <- count_if(4 %thru% 6, data_all$quality_assess_MTD)
+bias_med <- count_if(4 %thru% 6, data_all$quality_assess)
 sprintf("Number of studies scoring in the medium range for bias: %s", bias_med)
-bias_high <- count_if(0 %thru% 3, data_all$quality_assess_MTD)
+bias_high <- count_if(0 %thru% 3, data_all$quality_assess)
 sprintf("Number of studies scoring in the high range for bias: %s", bias_high)

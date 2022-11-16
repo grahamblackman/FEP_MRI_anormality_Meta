@@ -18,18 +18,32 @@
 # All abnormalities
 #
 
-ab_RR_meta <- metabin(fep_abnormal, fep_total, hc_abnormal, hc_total,
+ab_RR_meta <- meta::metabin(fep_abnormal, fep_total, hc_abnormal, hc_total,
                       studlab = author_year, 
                       label.e = "FEP", label.c = "Controls",
                       fixed = FALSE, random = TRUE,
                       method.tau = "REML", 
                       sm = "RR", #backtransf = FALSE,                           
                       data = data)
-forest(ab_RR_meta, layout="meta")
 
-#
-# Abnormality subtypes
-#
+precision_ab_RR_meta<- ab_RR_meta$statistic
+meta::forest(ab_RR_meta, layout="meta",sortvar=precision_ab_RR_meta)
+
+
+cr_ab_RR_meta <- metabin(fep_cr_abnormal, fep_total, hc_cr_abnormal, hc_total,
+                      studlab = author_year, 
+                      label.e = "FEP", label.c = "Controls",
+                      fixed = FALSE, random = TRUE,
+                      method.tau = "REML", 
+                      sm = "RR", #backtransf = FALSE,                           
+                      data = data)
+precision_cr_ab_RR_meta <- cr_ab_RR_meta$statistic
+meta::forest(cr_ab_RR_meta, layout="meta",sortvar=precision_cr_ab_RR_meta)
+
+
+# subtypes: not  reported in manuscript --------------------------
+
+
 
 # White matter
 wm_RR_meta <- metabin(fep_white_matter, fep_total, hc_whitematter, hc_total,
