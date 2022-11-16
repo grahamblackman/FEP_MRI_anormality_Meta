@@ -14,11 +14,11 @@
 
 # The following line will clear all objects from memory. Useful for a 'fresh start' when
 # debugging but not necessary for the script to run
-rm(list= ls()) 
+# rm(list= ls()) 
 
 # The following line clears all the plots from RStudio if this script is being run inside it
 # Useful for similar 'fresh start' reasons
-dev.off(dev.list()["RStudioGD"])
+# dev.off(dev.list()["RStudioGD"])
 
 # Load packages
 #
@@ -64,3 +64,23 @@ source("meta_mri_visualization_to_file.R")
 # source("meta_mri_visualization_addendum.R", echo=TRUE) # additional visualizations not included in the publication but useful for the open archive
 # source("meta_mri_analysis_or.R", echo=TRUE) # calculation of odd ratio between FEP and HC.  Not included in the publication as RR reported.
 
+# Display R version and package versions
+
+version
+
+print_package_version <- function(package_name) {
+  sprintf("Package version for %s is %s", package_name, packageVersion(package_name)) # for meta analysis
+}
+
+print_package_version("meta")
+print_package_version("metafor")
+print_package_version("readxl")
+print_package_version("skimr")
+print_package_version("tidyverse")
+print_package_version("lubridate")
+print_package_version("MASS")
+print_package_version("janitor")
+print_package_version("devtools")
+print_package_version("lme4")
+print_package_version("expss")
+print_package_version("scales") 
