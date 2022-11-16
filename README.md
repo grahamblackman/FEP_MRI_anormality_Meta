@@ -27,33 +27,24 @@ This repository contains the following files
 7. [meta_mri_visualization.R](https://github.com/grahamblackman/FEP_MRI_anormality_Meta/blob/main/meta_mri_visualization.R) - visualizes the results of the meta-analysis presented in the paper and related analyse
 8. [meta_mri_visualization_addendum.R](https://github.com/grahamblackman/FEP_MRI_anormality_Meta/blob/main/meta_mri_visualization_addendum.R) - additional confirmatory visualizations not included in the publication
 
+---
+
 ### Platform and package versions
 
 R language version, and package versions used to generate the results are:
 
-R Version 4.0.3
+R Version 4.0.3<br>
+Package version for meta is 5.2.0<br>
+Package version for metafor is 3.4.0<br>
+Package version for readxl is 1.4.1<br>
+Package version for skimr is 2.1.4<br>
+Package version for tidyverse is 1.3.0<br>
+Package version for lubridate is 1.7.9.2<br>
+Package version for MASS is 7.3.53<br>
+Package version for janitor is 2.1.0<br>
+Package version for devtools is 2.3.2<br>
+Package version for lme4 is 1.1.26<br>
+Package version for expss is 0.10.7<br>
+Package version for scales is 1.1.1<br>
 
-Package version for meta is 5.2.0
-
-Package version for metafor is 3.4.0
-
-Package version for readxl is 1.4.1
-
-Package version for skimr is 2.1.4
-
-Package version for tidyverse is 1.3.0
-
-Package version for lubridate is 1.7.9.2
-
-Package version for MASS is 7.3.53
-
-Package version for janitor is 2.1.0
-
-Package version for devtools is 2.3.2
-
-Package version for lme4 is 1.1.26
-
-Package version for expss is 0.10.7
-
-Package version for scales is 1.1.1
 
