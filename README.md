@@ -11,8 +11,6 @@ Analysis code and results for the study
 		src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
 </p>
 
-Publication status: currently in [pre-print](https://www.medrxiv.org/).
-
 This archive contains the code and data for the analysis reported in the above study. The code is written in the [R](https://en.wikipedia.org/wiki/R_(programming_language)) programming language.
 
 This repository contains the following files
