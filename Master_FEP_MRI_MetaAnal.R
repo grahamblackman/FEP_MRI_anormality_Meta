@@ -5,6 +5,7 @@
 # "How common are neuroradiological abnormalities in first-episode psychosis?          #
 #  A meta-analysis of prevalence"                                                      #
 #                                                                                      #
+# https://github.com/grahamblackman/FEP_MRI_anormality_Meta                            #
 ########################################################################################
 
 #
@@ -26,7 +27,6 @@ library("metafor") # for meta analysis
 library("readxl")# for reading excel documents
 library("skimr") # for summary
 library("tidyverse") # multiple packages, inc ggplots2
-library("xlxs") # for reading excel documents
 library("lubridate") # dealing with dates
 library("MASS") # Functions and datasets to support "Modern Applied Statistics with S
 library("janitor") # cleaning data
@@ -36,7 +36,7 @@ library("expss") #Tables, Labels and Some Useful Functions from Spreadsheets (eg
 library("scales") 
 
 # Ensure names map to explicit package functions and are not overwritten
-#
+
 escalc <- metafor::escalc
 rma <- metafor::rma
 transf.ipft.hm <- metafor::transf.ipft.hm
@@ -46,18 +46,21 @@ funnel <- metafor::funnel
 
 # Load data
 #
-data_all <- read_xlsx("FEP_MRI_data.xlsx", sheet = "sheet1")
+datafile_path = paste("FEP_MRI_data.xlsx")
+data_all <- read_xlsx(datafile_path, sheet = "sheet1")
 
 # Execute subscripts
-#
+
 source("meta_mri_processing.R")
 source("meta_mri_descriptive.R", echo = TRUE)
-source("meta_mri_analysis_prev.R")
-source("meta_mri_analysis_prev_subtype.R") 
+source("meta_mri_analysis_prev.R", echo = TRUE)
+source("meta_mri_analysis_prev_subtype.R", echo = TRUE) 
+source("meta_mri_analysis_RR.R", echo = TRUE)
 source("meta_mri_visualization.R")
+source("meta_mri_visualization_to_file.R")
 
-# The following is a script that includes additional visualizations not included in the publication but useful
-# for the open archive
+# Optional scripts
 
-# source("meta_mri_visualization_addendum.R", echo=TRUE)
+# source("meta_mri_visualization_addendum.R", echo=TRUE) # additional visualizations not included in the publication but useful for the open archive
+# source("meta_mri_analysis_or.R", echo=TRUE) # calculation of odd ratio between FEP and HC.  Not included in the publication as RR reported.
 
