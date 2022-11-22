@@ -16,23 +16,9 @@
 ############# Figure 1a. Forest plots: any abnormality ###############
 
 
-# general comments:
-##  see meta package to explore more useful arguments to customize forest plots.
-## seems that double-arcsine transformed not performed using this approach 
-
 # all abnormalities
 pes_fep_ab_summary <- meta::metaprop(fep_abnormal, fep_total, author_year, data=data, sm="PFT",
                                   method.tau="DL", method.ci="WS")
-
-# - Inverse variance method
-# - DerSimonian-Laird estimator for tau^2
-# - Jackson method for confidence interval of tau^2 and tau
-# - Freeman-Tukey double arcsine transformation
-
-# 
-# summary plot measure (sm)= Freeman-Tukey Double arcsine transformation (PFT),
-# estimate  between-study variance (tau)= DerSimonian-Laird  (DL)
-# calculate confidence intervals for individual studies (method.ci)= Wilson Score (WS)
 
 #order by precision
 precision_ab <- sqrt(ies_da_fep_ab$vi) 
@@ -53,9 +39,6 @@ forest_fep_ab <- forest(pes_fep_ab_summary,
 
 
 ############# Figure 1b. Forest plots: clinically relevant abnormalities ###############
-
-# general comments:
-# # see meta package to explore more useful arguments to customize forest plots.
 
 #order by precision [placed at top to guide exclusion]
 precision_cr_ab <- sqrt(ies_da_fep_cr_ab$vi)  
@@ -480,8 +463,15 @@ forest_other_ab <- forest(pes_fep_cr_other_summary,
                         plotwidth="5cm", colgap= "5mm",fig.height = 0.1, fig.width = 0.1, fig.align = "center",
                         pooled.totals=FALSE, comb.fixed=FALSE, fs.hetstat=10, print.tau2=TRUE, print.Q=TRUE, print.pval.Q=TRUE, print.I2=TRUE, digits=1,sortvar=precision_other)
 
+############# Supplementary Figures Section 5. Forest plots of Risk Ratio analysis ###############
 
-############# Supplementary Figures Section 5. Forest plots of leave one out sensitivity analysis ###############
+# sFigure 5a - Forest plot - Risk Ratio of all abnormalities
+meta::forest(ab_RR_meta, layout="meta",sortvar=precision_ab_RR_meta)
+
+# sFigure 5b - Forest plot - Risk Ratio of clinically relevant abnormalities
+meta::forest(cr_ab_RR_meta, layout="meta",sortvar=precision_cr_ab_RR_meta)
+
+############# Supplementary Figures Section 6. Forest plots of leave one out sensitivity analysis ###############
 
 # Clinically relevant abnormalities
 
