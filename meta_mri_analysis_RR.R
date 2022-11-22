@@ -7,7 +7,7 @@
 #                                                                                      #
 ########################################################################################
 
-# This script calculates the meta analysis of Risk Ratios (RR) between FEP and healthy control for...
+# This script calculates the meta analysis of Risk Ratios (RR) between FEP and healthy control for..
 #
 #  1. All abnormalities
 #  2. Abnormality subtypes (e.g vascular abnormalities) 
@@ -27,7 +27,7 @@ ab_RR_meta <- meta::metabin(fep_abnormal, fep_total, hc_abnormal, hc_total,
                       data = data)
 
 precision_ab_RR_meta<- ab_RR_meta$statistic
-meta::forest(ab_RR_meta, layout="meta",sortvar=precision_ab_RR_meta)
+
 
 
 cr_ab_RR_meta <- metabin(fep_cr_abnormal, fep_total, hc_cr_abnormal, hc_total,
@@ -38,7 +38,7 @@ cr_ab_RR_meta <- metabin(fep_cr_abnormal, fep_total, hc_cr_abnormal, hc_total,
                       sm = "RR", #backtransf = FALSE,                           
                       data = data)
 precision_cr_ab_RR_meta <- cr_ab_RR_meta$statistic
-meta::forest(cr_ab_RR_meta, layout="meta",sortvar=precision_cr_ab_RR_meta)
+
 
 
 # subtypes: not  reported in manuscript --------------------------
