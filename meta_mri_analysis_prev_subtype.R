@@ -1,18 +1,15 @@
 ########################################################################################
 #                                                                                      #
-# meta_mri_analysis_prev_subtype.R from Blackman et al                                #
+# meta_mri_analysis_prev_subtype.R from Blackman et al                                 #
 #                                                                                      #
-# "How common are neuroradiological abnormalities in first-episode psychosis?          #
-#  A meta-analysis of prevalence"                                                      #
+# "Prevalence of neuroradiological abnormalities in First Episode Psychosis:           #
+#  a Meta-Analysis"                                                                    #
 #                                                                                      #
 ########################################################################################
 
 #
 # This script calculates the meta analysis of proportions of neuroanatomical subtypes...
 #
-# Note:  metaprop and rma functions are used for running meta analysis (rma is needed for moderator and leave one out
-#       sensitivity analyses) 
-#       
 
 # all abnormalities --------------------------------------------------------------------
 
@@ -54,7 +51,7 @@ data_subtype$fep_pituitary<-as.numeric(data_subtype$fep_pituitary)
 
 # clinically relevant abnormalities --------------------------------------------------------------------
 
-#white_matter [ Zannetti et al not excluded as does not report CR abnormalities]
+#white_matter [ Zannetti et al excluded as does not report CR abnormalities]
 data_cr_subtype$fep_cr_white_matter<-as.numeric(data_cr_subtype$fep_cr_white_matter)
 (pes_fep_cr_white_matter_summary<-meta::metaprop(fep_cr_white_matter, fep_total, author_year, data=data_cr_subtype, sm="PFT",
                                              method.tau="DL", method.ci="NAsm"))

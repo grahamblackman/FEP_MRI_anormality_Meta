@@ -2,8 +2,8 @@
 #                                                                                      #
 # meta_mri_analysis_prev.R from Blackman et al                                         #
 #                                                                                      #
-# "How common are neuroradiological abnormalities in first-episode psychosis?          #
-#  A meta-analysis of prevalence"                                                      #
+# "Prevalence of neuroradiological abnormalities in First Episode Psychosis:           #
+#  a Meta-Analysis"                                                                    #
 #                                                                                      #
 ########################################################################################
 
@@ -201,94 +201,69 @@ stud.res[order(-abs.z)] # ordered
 leave1out_fep_ab <- leave1out(pes_da_fep_ab, digits = 2) #  based on DA transformation)
 print(leave1out_fep_ab)
 
-influence_fep_ab <- influence(pes_da_fep_ab)
-print(influence_fep_ab) #  asterix for influential cases -   based on 1 o 4 criteria (see help page for details)
+#  redundent
+# influence_fep_ab <- influence(pes_da_fep_ab)
+# print(influence_fep_ab) #  [asterix for influential cases -   based on 1 o 4 criteria]
 
 # L1O based on 'meta::metainf' function
-precision <- sqrt(ies_da_fep_ab$vi) # no precision estimate for Dazzan et al
+precision <- sqrt(ies_da_fep_ab$vi) 
 leave1out_FEP_ab <- metainf(pes_fep_ab_summary, pooled="random") 
-# leave1out_fep_ab <- forest(metainf(pes_fep_ab_summary, pooled="random", sortvar=precision), layout="JAMA") #  works as of 21st Dec
+leave1out_FEP_ab
+# leave1out_fep_ab <- forest(metainf(pes_fep_ab_summary, pooled="random", sortvar=precision), layout="JAMA") 
 
 ####  clinically relevant abnormalities
 
-#L1O based on 'metafor::leave1out' function 
-leave1out_fep_cr_ab <- leave1out(pes_da_fep_cr_ab, digits = 2) # works nb based on DA transformation)
-print(leave1out_fep_cr_ab)
+# L1O based on 'meta::metainf' function
+precision_cr <- sqrt(ies_da_fep_cr_ab$vi) 
+leave1out_FEP_cr_ab <- metainf(pes_fep_cr_ab_summary, pooled="random") 
+leave1out_FEP_cr_ab
+#leave1out_fep_cr_ab <- forest(metainf(pes_fep_cr_ab_summary, pooled="random", sortvar=precision_cr), layout="JAMA") 
+
+# #  redundent
+# #L1O based on 'metafor::leave1out' function 
+# leave1out_fep_cr_ab <- leave1out(pes_da_fep_cr_ab, digits = 2) # works nb based on DA transformation)
+# print(leave1out_fep_cr_ab)
 # forest(x =leave1out_fep_cr_ab$estimate, ci.lb = leave1out_fep_cr_ab$ci.lb, ci.ub = leave1out_fep_cr_ab$ci.ub)
+# 
+# #  redundent
+# influence_fep_cr_ab <- influence(pes_da_fep_cr_ab)
+# print(influence_fep_cr_ab) #  asterix for influential cases -   based on 1 o 4 criteria (see help page for details)
 
-influence_fep_cr_ab <- influence(pes_da_fep_cr_ab)
-print(influence_fep_cr_ab) #  asterix for influential cases -   based on 1 o 4 criteria (see help page for details)
+#################### Rerun meta analysis excluding outliers:  
 
-#################### Rerun meta analysis excluding outliers:  manually specify outlier [in progress]
-
-# any abnormality
-pes_fep_ab_noutlier_summary <- meta::metaprop(fep_abnormal, fep_total, author_year, data=data[-c(6),], sm="PFT",
-                                  method.tau="DL", method.ci="NAsm")
-#forest(pes_fep_ab_noutlier_summary, layout="JAMA")
+# any abnormality [redundent - no outliner]
+# pes_fep_ab_noutlier_summary <- meta::metaprop(fep_abnormal, fep_total, author_year, data=data[-c(6),], sm="PFT",
+#                                   method.tau="DL", method.ci="NAsm")
+# #forest(pes_fep_ab_noutlier_summary, layout="JAMA")
 
 ## clinically relevant abnormalities
-    # MTD - no outliers 
+
 
 ########## Explaining heterogeneity [subgroup and meta regression]
   
-########## subgroup 
-# rater type: to do
-# scan resolution: to do
-# recruitment type (clin vs res):  [in progress]
-# whole vs restricted brain: works [for training, consider removing in due course 1/11/20]
 
-# calculating subgroup summary proportions, conduct sub- group analysis, and
-# recalculate the overall summary proportion[see pg 40 of Conducting
-# Meta-Analyses of Proportions in R for guidance]
-  
-  #brief summary [pg 39-40] " we assume a common between-study variance
-  #component across subgroups and pool within-group estimates of τ^2 . In this
-  #case, we can directly use the rma() com- mand to fit a mixed-effect model to
-  #evaluate the moderating effect of a potential predictor. How- ever, to allow
-  #us to calculate a new overall summary proportion using a pooled τ^2 across
-  #all stud- ies, we still have to combine a new data frame containing
-  #statistics estimated in two random- effects models. Once we have created the
-  #new data frame, we can calculate a new overall summary effect based on the
-  #data frame using a fixed-effect model or a random-effects model (based on the
-  #various factors we have discussed above, e.g., the conclusion one wishes to
-  #make, the true distribu- tion of effect sizes, etc.)."Assume a common
-  #between-study variance component. Therefore pool within-group estimates of
-  #between-study variance. This code is for data which has undergone
-  #double-arcsine transformation
-  
-  #objects created:
-  # subg_moderator_fep_ab = subgroup moderator 
-  # pes_da_all_brain_fep_ab = display subgroup 1 summary ES
-  # pes_da_restricted_brain_fep_ab = display subgroup 2 summary 
-  # subg_moderator_fep_ab =  subgroup analysis results
-  # pes_whole_brain_fep = recomputed summary effect size
-  
-  ############
-  
-  # queries: 
-    # set rma to random effects e.g DL?
-  
 ########### subgroup analysis 
+
+## rater type: radiologist versus non-radiologist
+
+# all abnormalities [redundent]
+# updateforest_fep_ab_rater<-update.meta(pes_fep_ab_summary, subgroup = all_rater_radiol_bin)
+# updateforest_fep_ab_rater 
+
+# clinically relevant abnormalities  [redundant; unbalanced]
+updateforest_fep_cr_ab_rater <- update.meta(pes_fep_cr_ab_summary, subgroup = all_rater_radiol_bin)
+updateforest_fep_cr_ab_rater 
 
 ## research verses clinical
 
-# all abnormalities
-updateforest_fep_ab_recruitment <- update.meta(pes_fep_ab_summary, subgroup = recruitment)
-updateforest_fep_ab_recruitment 
+# all abnormalities [redundent]
+# updateforest_fep_ab_recruitment <- update.meta(pes_fep_ab_summary, subgroup = recruitment)
+# updateforest_fep_ab_recruitment 
 
 # clinically relevant abnormalities
 updateforest_fep_cr_ab_recruitment <- update.meta(pes_fep_cr_ab_summary, subgroup = recruitment)
 updateforest_fep_cr_ab_recruitment 
 
-## rater type: radiologist versus non-radiologist
-
-# all abnormalities
-updateforest_fep_ab_rater<-update.meta(pes_fep_ab_summary, subgroup = all_rater_radiol_bin)
-updateforest_fep_ab_rater 
-
-# clinically relevant abnormalities
-updateforest_fep_cr_ab_rater <- update.meta(pes_fep_cr_ab_summary, subgroup = all_rater_radiol_bin)
-updateforest_fep_cr_ab_rater 
 
 ## scan resolution: 3.0T or < 3.0T
 
@@ -301,23 +276,23 @@ updateforest_fep_cr_ab_scanresolution <- update.meta(pes_fep_cr_ab_summary, subg
 updateforest_fep_cr_ab_scanresolution
 
 
-## brain scan: whole vs restricted brain
+## brain scan: whole vs restricted brain 
 
 # all abnormalities
 updateforest_fep_ab_brain <- update.meta(pes_fep_ab_summary, subgroup = whole_brain_binary)
 updateforest_fep_ab_brain 
 
-# clinically relevant abnormalities
-updateforest_fep_cr_ab_brain <- update.meta(pes_fep_cr_ab_summary, subgroup = whole_brain_binary) 
-updateforest_fep_cr_ab_brain
+# clinically relevant abnormalities [redun]
+# updateforest_fep_cr_ab_brain <- update.meta(pes_fep_cr_ab_summary, subgroup = whole_brain_binary) 
+# updateforest_fep_cr_ab_brain
 
-########## meta-regression: continuous variables [in progress] ########## 
+########## meta-regression: continuous variables ########## 
 
-# metareg: mean age any abnormality
-metareg_age_fep_ab <- rma(yi, vi, data = ies_da_fep_ab, mods = ~age_fep, method="DL")
-print(metareg_age_fep_ab)
-metareg_pval_age_fep_ab <- metareg_age_fep_ab$pval[2]
-metareg_pval_age_fep_ab
+# metareg: mean age any abnormality [redundent]
+# metareg_age_fep_ab <- rma(yi, vi, data = ies_da_fep_ab, mods = ~age_fep, method="DL")
+# print(metareg_age_fep_ab)
+# metareg_pval_age_fep_ab <- metareg_age_fep_ab$pval[2]
+# metareg_pval_age_fep_ab
 
 # metareg: mean age clinically relevant abnormalities
 metareg_age_fep_cr_ab <- rma(yi, vi, data = ies_da_fep_cr_ab, mods = ~age_fep, method="DL")
@@ -325,11 +300,11 @@ print(metareg_age_fep_cr_ab)
 metareg_pval_age_fep_cr_ab <- metareg_age_fep_cr_ab$pval[2]
 metareg_pval_age_fep_cr_ab
 
-# metareg: year any abnormality
-metareg_year_fep_ab <- rma(yi, vi, data = ies_da_fep_ab, mods = ~year, method="DL")
-print(metareg_year_fep_ab)
-metareg_pval_year_fep_ab <- metareg_year_fep_ab$pval[2]
-metareg_pval_year_fep_ab
+# metareg: year any abnormality [redundent]
+# metareg_year_fep_ab <- rma(yi, vi, data = ies_da_fep_ab, mods = ~year, method="DL")
+# print(metareg_year_fep_ab)
+# metareg_pval_year_fep_ab <- metareg_year_fep_ab$pval[2]
+# metareg_pval_year_fep_ab
 
 # metareg: year clinically relevant abnormalities
 metareg_year_fep_cr_ab <- rma(yi, vi, data = ies_da_fep_cr_ab, mods = ~year, method="DL")
@@ -337,37 +312,41 @@ print(metareg_year_fep_cr_ab)
 metareg_pval_year_fep_cr_ab <- metareg_year_fep_cr_ab$pval[2]
 metareg_pval_year_fep_cr_ab
 
-# metareg: psychosis duration any abnormality 
-metareg_psychdur_fep_ab <- rma(yi, vi, data = ies_da_fep_ab, mods = ~psychosis_duration_wks, method="DL")
-print(metareg_psychdur_fep_ab)
-metareg_pval_psychdur_fep_ab <- metareg_psychdur_fep_ab$pval[2]
-metareg_pval_psychdur_fep_ab
+# metareg: psychosis duration any abnormality [redundent]
+# metareg_psychdur_fep_ab <- rma(yi, vi, data = ies_da_fep_ab, mods = ~psychosis_duration_wks, method="DL")
+# print(metareg_psychdur_fep_ab)
+# metareg_pval_psychdur_fep_ab <- metareg_psychdur_fep_ab$pval[2]
+# metareg_pval_psychdur_fep_ab
 
-# metareg: psychosis duration clinically relevant abnormalities [insufficient studies 8/8/22]
-# metareg_psychdur_fep_cr_ab <- rma(yi, vi, data = ies_da_fep_cr_ab, mods = ~psychosis_duration_wks, method = "DL")
-# print(metareg_psychdur_fep_cr_ab)
-# metareg_pval_psychdur_fep_cr_ab <- metareg_psychdur_fep_cr_ab$pval[2]
+# metareg: psychosis duration clinically relevant abnormalities [redundent: insufficient studies]
+metareg_psychdur_fep_cr_ab <- rma(yi, vi, data = ies_da_fep_cr_ab, mods = ~psychosis_duration_wks, method = "DL")
+print(metareg_psychdur_fep_cr_ab)
+metareg_pval_psychdur_fep_cr_ab <- metareg_psychdur_fep_cr_ab$pval[2]
 
 
 ########## sensitivity analyses (assessment of robustness) ########## 
 
-# Studies with a mean patient age above 35 years --- excluded 3 studies --- 9 studies included
+# Studies with a mean patient age above 35 years: excluded 2 studies --- 10 studies included
 exc_over35_fep_ab <- update.meta(pes_fep_ab_summary, exclude = pes_fep_ab_summary$data$age_under_35 < 1)
 print(exc_over35_fep_ab)
 # forest_exc_over35_fep_ab <- forest(exc_over35_fep_ab)
 
-# studies that performed radiological assessment on restricted brain regions --- excluded 4 studies --- 8 studies included
+exc_over35_fep_ab <- update.meta(pes_fep_cr_ab_summary, exclude = pes_fep_cr_ab_summary$data$age_under_35 < 1)
+print(exc_over35_fep_ab)
+# forest_exc_over35_fep_ab <- forest(exc_over35_fep_ab)
+
+
+# studies that performed radiological assessment on restricted brain regions: excluded 4 studies --- 8 studies included
 exc_restrictbrain_fep_ab <- update.meta(pes_fep_ab_summary, exclude = pes_fep_ab_summary$data$whole_brain_binary < 1)
 print(exc_restrictbrain_fep_ab)
 # forest_exc_restrictbrain_fep_ab <- forest(exc_restrictbrain_fep_ab) #excluded studies still show in plot but not accounted in meta-analysis
 
-# studies that screened out patients with evidence of a secondary cause of psychosis (e.g. abnormal neurological exam)
-# --- excluded 3 studies --- 9 studies included
+# studies that screened out patients with evidence of a secondary cause of psychosis (e.g. abnormal neurological exam): excluded 2 studies --- 10 studies included
 exc_organicnr_fep_ab <- update.meta(pes_fep_ab_summary, exclude = pes_fep_ab_summary$data$organic_exclude_binary < 1)
 print(exc_organicnr_fep_ab)
 # forest_exc_organicnr_fep_ab <- forest(exc_organicnr_fep_ab)  #excluded studies still show in plot but not accounted in meta-analysis
 
-# studies where MRI assessment was not performed by a radiologist --- excluded 3 studies --- 9 studies included
+# studies where MRI assessment was not performed by a radiologist:  excluded 3 studies --- 9 studies included
 exc_raterrad_fep_ab <- update.meta(pes_fep_ab_summary, exclude = pes_fep_ab_summary$data$all_rads_binary < 1)
 print(exc_raterrad_fep_ab)
 # forest_exc_raterrad_fep_ab <- forest(exc_raterrad_fep_ab)  #excluded studies still show in plot but not accounted in meta-analysis

@@ -2,16 +2,18 @@
 #                                                                                      #
 # Master_FEP_MRI_MetaAnal.R from Blackman et al                                        #
 #                                                                                      #
-# "How common are neuroradiological abnormalities in first-episode psychosis?          #
-#  A meta-analysis of prevalence"                                                      #
+# "Prevalence of neuroradiological abnormalities in First Episode Psychosis:           #
+#  a Meta-Analysis"                                                                    #
 #                                                                                      #
 # https://github.com/grahamblackman/FEP_MRI_anormality_Meta                            #
+#                                                                                      #
 ########################################################################################
 
+# ** to begin, you will need to set the working drive to where the r scripts and excel data file are stored**
 #
 # This script loads the relevant libraries, defines key functions, and executes the
 # subscripts.
-
+#
 # The following line will clear all objects from memory. Useful for a 'fresh start' when
 # debugging but not necessary for the script to run
 # rm(list= ls()) 
@@ -20,8 +22,12 @@
 # Useful for similar 'fresh start' reasons
 # dev.off(dev.list()["RStudioGD"])
 
+# For the following write_to_file variable
+#  set to 0 to display (e.g. RStudio)
+#  set to 1 to write figures to ./output/ directory (must already exist in the working directory)
+write_to_file = 1
+
 # Load packages
-#
 library("meta") # for meta analysis
 library("metafor") # for meta analysis
 library("readxl")# for reading excel documents
@@ -36,7 +42,6 @@ library("expss") #Tables, Labels and Some Useful Functions from Spreadsheets (eg
 library("scales") 
 
 # Ensure names map to explicit package functions and are not overwritten
-
 escalc <- metafor::escalc
 rma <- metafor::rma
 transf.ipft.hm <- metafor::transf.ipft.hm
@@ -46,6 +51,7 @@ funnel <- metafor::funnel
 
 # Load data
 #
+setwd("/home/main/Dropbox/Studies/GrahamImagingPsychosisMeta/MRI_meta_analysis/analysis_scripts_mar_2023/")
 datafile_path = paste("FEP_MRI_data.xlsx")
 data_all <- read_xlsx(datafile_path, sheet = "sheet1")
 
@@ -53,16 +59,16 @@ data_all <- read_xlsx(datafile_path, sheet = "sheet1")
 
 source("meta_mri_processing.R")
 source("meta_mri_descriptive.R", echo = TRUE)
-source("meta_mri_analysis_prev.R", echo = TRUE)
+source("meta_mri_analysis_prev.R", echo = TRUE) # note to Vaughan 4/4/23- as there is major imbalance in how many studies
 source("meta_mri_analysis_prev_subtype.R", echo = TRUE) 
-source("meta_mri_analysis_RR.R", echo = TRUE)
-source("meta_mri_visualization.R")
-source("meta_mri_visualization_to_file.R")
+source("meta_mri_analysis_RR.R", echo = TRUE)  # note to Vaughan 4/4/23- For the L1O meta analysis, it now looks like we don't have any influential studies, but would be appreciative of your thoughts on this
+source("meta_mri_visualization.R", echo = TRUE)  
+source("meta_mri_visualization_subtypes.R", echo = TRUE)  # note to Vaughan 4/4/23- this is a new script I wrote that automatically creates the forest plots (of the subtypes) from the meta analytic estimates. I've adpated the code from our other study (thanks again for developing!)
+
 
 # Optional scripts
 
-# source("meta_mri_visualization_addendum.R", echo=TRUE) # additional visualizations not included in the publication but useful for the open archive
-# source("meta_mri_analysis_or.R", echo=TRUE) # calculation of odd ratio between FEP and HC.  Not included in the publication as RR reported.
+# source("meta_mri_visualization_addendum.R") # additional visualizations not included in the publication but useful for the open archive
 
 # Display R version and package versions
 
