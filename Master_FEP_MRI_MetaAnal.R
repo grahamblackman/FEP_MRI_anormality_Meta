@@ -25,7 +25,7 @@
 # For the following write_to_file variable
 #  set to 0 to display (e.g. RStudio)
 #  set to 1 to write figures to ./output/ directory (must already exist in the working directory)
-write_to_file = 1
+write_to_file = 0
 
 # Load packages
 library("meta") # for meta analysis
@@ -51,7 +51,7 @@ funnel <- metafor::funnel
 
 # Load data
 #
-setwd("/home/main/Dropbox/Studies/GrahamImagingPsychosisMeta/MRI_meta_analysis/analysis_scripts_mar_2023/")
+#setwd("")
 datafile_path = paste("FEP_MRI_data.xlsx")
 data_all <- read_xlsx(datafile_path, sheet = "sheet1")
 
