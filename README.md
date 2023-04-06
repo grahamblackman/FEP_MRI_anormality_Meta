@@ -33,15 +33,15 @@ This repository contains the following files
 R language version, and package versions used to generate the results are:
 
 R Version 4.2.1<br>
-Package version for meta is 6.2.1
-Package version for metafor is 4.0.0
-Package version for readxl is 1.4.2
-Package version for skimr is 2.1.5
-Package version for tidyverse is 2.0.0
-Package version for lubridate is 1.9.2
-Package version for MASS is 7.3.58.3
-Package version for janitor is 2.2.0
-Package version for devtools is 2.4.5
-Package version for lme4 is 1.1.32
-Package version for expss is 0.11.4
-Package version for scales is 1.2.1
+Package version for meta is 6.2.1<br>
+Package version for metafor is 4.0.0<br>
+Package version for readxl is 1.4.2<br>
+Package version for skimr is 2.1.5<br>
+Package version for tidyverse is 2.0.0<br>
+Package version for lubridate is 1.9.2<br>
+Package version for MASS is 7.3.58.3<br>
+Package version for janitor is 2.2.0<br>
+Package version for devtools is 2.4.5<br>
+Package version for lme4 is 1.1.32<br>
+Package version for expss is 0.11.4<br>
+Package version for scales is 1.2.1<br>
