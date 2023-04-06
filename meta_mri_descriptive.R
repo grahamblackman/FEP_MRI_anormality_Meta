@@ -2,8 +2,8 @@
 #                                                                                      #
 # meta_mri_descriptive.R from Blackman et al                                           #
 #                                                                                      #
-# "How common are neuroradiological abnormalities in first-episode psychosis?         #
-#  A meta-analysis of prevalence"                                                      #
+# "Prevalence of neuroradiological abnormalities in First Episode Psychosis:           #
+#  a Meta-Analysis"                                                                    #
 #                                                                                      #
 ########################################################################################
 
