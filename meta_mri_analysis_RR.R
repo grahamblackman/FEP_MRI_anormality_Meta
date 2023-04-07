@@ -23,7 +23,7 @@ ab_RR_meta <- meta::metabin(fep_abnormal, fep_total, hc_abnormal, hc_total,
                       sm = "RR", backtransf = TRUE,                           
                       data = data)
 precision_ab_RR_meta <- ab_RR_meta$statistic
-
+ab_RR_meta
 
 # clinically relevant abnormalities
 
@@ -35,18 +35,30 @@ cr_ab_RR_meta <- metabin(fep_cr_abnormal, fep_total, hc_cr_abnormal, hc_total,
                       sm = "RR", backtransf = TRUE,                           
                       data = data)
 precision_cr_ab_RR_meta <- cr_ab_RR_meta$statistic
+cr_ab_RR_meta
 
+#
+# Influential study / leave one out sensitivity analysis for any abnormality risk ratio meta-analysis
+#
 
-#---------------- [draft: L10 RR]
+# Are there any influential studies (No)
+InfluenceAnalysis(ab_RR_meta, random = TRUE)
+
+# Leave one out sensitivity analysis
 leave1out_ab_RR_meta <- metainf(ab_RR_meta, pooled="random", sortvar=precision_ab_RR_meta)
 leave1out_ab_RR_meta
 #forest(leave1out_ab_RR_meta)
 
+#
+# Influential study / leave one out sensitivity analysis for clinically relevant abnormality risk ratio meta-analysis
+#
+
+# Are there any influential studies (Yes, Sommer 2013)
+InfluenceAnalysis(cr_ab_RR_meta, random = TRUE)
+# Does the overall estimate change when studies remove (Yes, when Somer removed)
 leave1out_cr_ab_RR_meta <- metainf(cr_ab_RR_meta, pooled="random", sortvar=precision_cr_ab_RR_meta)
 leave1out_cr_ab_RR_meta
 #forest(leave1out_cr_ab_RR_meta)
-
-#---------------- 
 
 
 # subtypes: not  reported in manuscript --------------------------

@@ -28,18 +28,19 @@
 write_to_file = 0
 
 # Load packages
-library("meta") # for meta analysis
-library("metafor") # for meta analysis
-library("readxl")# for reading excel documents
-library("skimr") # for summary
-library("tidyverse") # multiple packages, inc ggplots2
-library("lubridate") # dealing with dates
+library("meta") # For meta analysis
+library("metafor") # For meta analysis
+library("readxl")# For reading excel documents
+library("skimr") # For summary
+library("tidyverse") # Multiple packages, inc ggplots2
+library("lubridate") # Dealing with dates
 library("MASS") # Functions and datasets to support "Modern Applied Statistics with S
-library("janitor") # cleaning data
-library("devtools") # to download packages in development
-library("lme4") #linear model 4, required for meta analysis
-library("expss") #Tables, Labels and Some Useful Functions from Spreadsheets (eg excel and SPSS' Statistics)
-library("scales") 
+library("janitor") # Cleaning data
+library("devtools") # To download packages in development
+library("lme4") # Linear model 4, required for meta analysis
+library("expss") # Tables, Labels and Some Useful Functions from Spreadsheets (eg excel and SPSS' Statistics)
+library("scales") # For visualisation
+library("dmetar") # Influential study diagnostics for meta-analysis
 
 # Ensure names map to explicit package functions and are not overwritten
 escalc <- metafor::escalc
@@ -90,3 +91,4 @@ print_package_version("devtools")
 print_package_version("lme4")
 print_package_version("expss")
 print_package_version("scales") 
+print_package_version("dmetar") 
