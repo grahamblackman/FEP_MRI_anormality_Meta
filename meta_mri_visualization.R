@@ -19,7 +19,7 @@
 pes_fep_ab_summary <- meta::metaprop(fep_abnormal, fep_total, author_year, data=data, sm="PFT",
                                   method.tau="DL", method.ci="WS")
 
-#order by precision
+# order by precision
 precision_ab <- sqrt(ies_da_fep_ab$vi) 
 
 if (write_to_file == 1) {
@@ -46,7 +46,7 @@ if (write_to_file == 1) {
 
 ############# Figure 1b. Forest plots: clinically relevant abnormalities ###############
 
-#order by precision 
+# order by precision 
 precision_cr_ab <- sqrt(ies_da_fep_cr_ab$vi)  
 
 # clinically relevant abnormalities
@@ -130,7 +130,7 @@ if (write_to_file == 1) {
 
 options(digits=1)
 
-# #order by precision
+# order by precision
 # precision=sqrt(ies_da_fep_ab$vi) 
 
 # white matter

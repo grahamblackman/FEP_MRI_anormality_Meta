@@ -13,7 +13,7 @@
 # related analyses
 #
 # Function to extract raw proportion and upper and lower CI from meta-analytic objects
-# Outputs vector with name, propotion, upper and lower CI
+# Outputs vector with name, proportion, upper and lower CI
 
 extract_proportions <- function(meta_obj, name){
   (TE_random_vals <- c(meta_obj$TE.random,
@@ -24,7 +24,6 @@ extract_proportions <- function(meta_obj, name){
 }
 
 ############# Figure 2a. Forest plots: MRI abnormalities in first episode psychosis grouped by neuroanatomical type (all abnormalities)  ###############
-
 
 # Extract raw proportions from meta-analytic objects using the extract_proportions function
 # and add each one to the bottom of the summary_df dataframe
@@ -86,16 +85,16 @@ if (write_to_file == 1) {
 }
 
 ggplot(data=subtype_ab, aes(x= reorder(IV,-ES), y=ES, ymin=LCI, ymax=UCI)) +
-  geom_pointrange()+ # Makes range for ggplot values based on the data and AES specified in first line
-  geom_hline(yintercept=0, lty=1, size =1) +  # add a  line at x=0 after flip
-  geom_errorbar(aes(ymin=LCI, ymax=UCI), width=0.5, cex=1)+ # Makes whiskers on the range
-  facet_wrap(~DV)+ # Makes DV header (Can handle multiple DVs)
-  coord_flip() + # flip coordinates (puts labels on y axis)
-  geom_point(shape = 15, size = 5) + # specifies the size and shape of the geompoint
-  ggtitle("")+ # Blank Title for the Graph
-  xlab("") + # Label on the Y axis (flipped specification do to coord_flip)
-  ylab("Any abnormality (proportion)  ") + # Label on the X axis (flipped specification do to coord_flip)
-  scale_y_continuous(limits = c(0,.15), breaks = c(0,.05,.10,.15))+ # limits and tic marks on X axis (flipped specification do to coord_flip)
+  geom_pointrange()+ 
+  geom_hline(yintercept=0, lty=1, size =1) +  
+  geom_errorbar(aes(ymin=LCI, ymax=UCI), width=0.5, cex=1)+ 
+  facet_wrap(~DV)+
+  coord_flip() +  
+  geom_point(shape = 15, size = 5) + 
+  ggtitle("")+ 
+  xlab("") + 
+  ylab("Any abnormality (proportion)  ") + 
+  scale_y_continuous(limits = c(0,.15), breaks = c(0,.05,.10,.15))+ 
   theme(line = element_line(colour = "white", size = 3),
         strip.background = element_rect(fill="white"),
         legend.position ="none",
@@ -181,16 +180,16 @@ if (write_to_file == 1) {
 }
 
 ggplot(data=subtype_cr_ab, aes(x= reorder(IV_cr,-ES_cr), y=ES_cr, ymin=LCI_cr, ymax=UCI_cr)) +
-  geom_pointrange()+ # Makes range for ggplot values based on the data and AES specified in first line
-  geom_hline(yintercept=0, lty=1, size =1) +  # add a  line at x=0 after flip
-  geom_errorbar(aes(ymin=LCI_cr, ymax=UCI_cr), width=0.5, cex=1)+ # Makes whiskers on the range
-  facet_wrap(~DV_cr)+ # Makes DV header (Can handle multiple DVs)
-  coord_flip() + # flip coordinates (puts labels on y axis)
-  geom_point(shape = 15, size = 5) + # specifies the size and shape of the geompoint
-  ggtitle("")+ # Blank Title for the Graph
-  xlab("") + # Label on the Y axis (flipped specification do to coord_flip)
-  ylab("Clinically relevant abnormality (proportion)  ") + # Label on the X axis (flipped specification do to coord_flip)
-  scale_y_continuous(limits = c(0,.15), breaks = c(0,.05,.10,.15))+ # limits and tic marks on X axis (flipped specification do to coord_flip)
+  geom_pointrange()+ 
+  geom_hline(yintercept=0, lty=1, size =1) +  
+  geom_errorbar(aes(ymin=LCI_cr, ymax=UCI_cr), width=0.5, cex=1)+ 
+  facet_wrap(~DV_cr)+ 
+  coord_flip() + 
+  geom_point(shape = 15, size = 5) + 
+  ggtitle("")+ 
+  xlab("") + 
+  ylab("Clinically relevant abnormality (proportion)  ") + 
+  scale_y_continuous(limits = c(0,.15), breaks = c(0,.05,.10,.15))+ 
   theme(line = element_line(colour = "white", size = 3),
         strip.background = element_rect(fill="white"),
         legend.position ="none",

@@ -9,7 +9,7 @@
 #                                                                                      #
 ########################################################################################
 
-# ** to begin, you will need to set the working drive to where the r scripts and excel data file are stored**
+# ** to begin, you will need to set the working drive to the location of where ever you have the analysis scripts and excel data files stored. You will also need to have a subfolder entitled 'output'**
 #
 # This script loads the relevant libraries, defines key functions, and executes the
 # subscripts.
@@ -25,12 +25,12 @@
 # For the following write_to_file variable
 #  set to 0 to display (e.g. RStudio)
 #  set to 1 to write figures to ./output/ directory (must already exist in the working directory)
-write_to_file = 0
+write_to_file = 1
 
 # Load packages
 library("meta") # For meta analysis
 library("metafor") # For meta analysis
-library("readxl")# For reading excel documents
+library("readxl") # For reading excel documents
 library("skimr") # For summary
 library("tidyverse") # Multiple packages, inc ggplots2
 library("lubridate") # Dealing with dates
@@ -40,7 +40,6 @@ library("devtools") # To download packages in development
 library("lme4") # Linear model 4, required for meta analysis
 library("expss") # Tables, Labels and Some Useful Functions from Spreadsheets (eg excel and SPSS' Statistics)
 library("scales") # For visualisation
-library("dmetar") # Influential study diagnostics for meta-analysis
 
 # Ensure names map to explicit package functions and are not overwritten
 escalc <- metafor::escalc
@@ -51,8 +50,7 @@ expss <- expss::count_if
 funnel <- metafor::funnel
 
 # Load data
-#
-#setwd("")
+
 datafile_path = paste("FEP_MRI_data.xlsx")
 data_all <- read_xlsx(datafile_path, sheet = "sheet1")
 
@@ -62,9 +60,9 @@ source("meta_mri_processing.R")
 source("meta_mri_descriptive.R", echo = TRUE)
 source("meta_mri_analysis_prev.R", echo = TRUE)
 source("meta_mri_analysis_prev_subtype.R", echo = TRUE) 
-source("meta_mri_analysis_RR.R", echo = TRUE)
-source("meta_mri_visualization.R", echo = TRUE)  
-source("meta_mri_visualization_subtypes.R", echo = TRUE)
+source("meta_mri_analysis_RR.R", echo = TRUE)  
+source("meta_mri_visualization.R", echo = TRUE) 
+source("meta_mri_visualization_subtypes.R", echo = TRUE) 
 
 # Display R version and package versions
 
@@ -86,4 +84,3 @@ print_package_version("devtools")
 print_package_version("lme4")
 print_package_version("expss")
 print_package_version("scales") 
-print_package_version("dmetar") 

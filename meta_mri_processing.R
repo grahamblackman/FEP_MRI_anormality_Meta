@@ -14,8 +14,8 @@
 
 ####### preparing data for analyses ######
 
-# Ensure variables are of the correct type
-#
+# Ensures variables are of the correct type
+
 
 # Create 'data' dataframe that excludes Zanetti et al study (study only reports white matter abnormalities)
 data <- data_all %>%
@@ -100,7 +100,6 @@ data_cr$fep_cr_abnormal <- as.numeric(data_cr$fep_cr_abnormal)
 data_subtype <- data %>%
   filter(include_subtype == "yes")
 
-# Create data_subtype_all dataframe with studies reporting anatomical subtypes [inc Zannetti et al]
 data_subtype_all <- data_all %>%
   filter(include_subtype == "yes")
 
