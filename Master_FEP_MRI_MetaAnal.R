@@ -60,16 +60,11 @@ data_all <- read_xlsx(datafile_path, sheet = "sheet1")
 
 source("meta_mri_processing.R")
 source("meta_mri_descriptive.R", echo = TRUE)
-source("meta_mri_analysis_prev.R", echo = TRUE) # note to Vaughan 4/4/23- as there is major imbalance in how many studies
+source("meta_mri_analysis_prev.R", echo = TRUE)
 source("meta_mri_analysis_prev_subtype.R", echo = TRUE) 
-source("meta_mri_analysis_RR.R", echo = TRUE)  # note to Vaughan 4/4/23- For the L1O meta analysis, it now looks like we don't have any influential studies, but would be appreciative of your thoughts on this
+source("meta_mri_analysis_RR.R", echo = TRUE)
 source("meta_mri_visualization.R", echo = TRUE)  
-source("meta_mri_visualization_subtypes.R", echo = TRUE)  # note to Vaughan 4/4/23- this is a new script I wrote that automatically creates the forest plots (of the subtypes) from the meta analytic estimates. I've adpated the code from our other study (thanks again for developing!)
-
-
-# Optional scripts
-
-# source("meta_mri_visualization_addendum.R") # additional visualizations not included in the publication but useful for the open archive
+source("meta_mri_visualization_subtypes.R", echo = TRUE)
 
 # Display R version and package versions
 
