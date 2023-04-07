@@ -44,4 +44,3 @@ Package version for devtools is 2.4.5<br>
 Package version for lme4 is 1.1.32<br>
 Package version for expss is 0.11.4<br>
 Package version for scales is 1.2.1<br>
-Package version for dmetar is 0.0.9000<br>
