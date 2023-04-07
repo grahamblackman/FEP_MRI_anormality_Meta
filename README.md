@@ -24,7 +24,6 @@ This repository contains the following files
 6. [meta_mri_analysis_RR.R](https://github.com/grahamblackman/FEP_MRI_anormality_Meta/blob/main/meta_mri_analysis_RR.R) - calculates meta-analytic risk ratios for differences in abnormalities between FEP sample and healthy controls
 7. [meta_mri_visualization.R](https://github.com/grahamblackman/FEP_MRI_anormality_Meta/blob/main/meta_mri_visualization.R) - visualizes the results of the meta-analysis presented in the paper and related analyses (Figures 1a / 1b and figures in the supplementary material)
 8. [meta_mri_visualization_subtypes.R](https://github.com/grahamblackman/FEP_MRI_anormality_Meta/blob/main/meta_mri_visualization_subtypes.R) - visualizes the results of the subtype prevalence meta-analysis presented in the paper (Figures 2a / 2b)
-9. [meta_mri_visualization_addendum.R](https://github.com/grahamblackman/FEP_MRI_anormality_Meta/blob/main/meta_mri_visualization_addendum.R) - additional confirmatory visualizations not included in the publication
 
 ---
 
@@ -45,3 +44,4 @@ Package version for devtools is 2.4.5<br>
 Package version for lme4 is 1.1.32<br>
 Package version for expss is 0.11.4<br>
 Package version for scales is 1.2.1<br>
+Package version for dmetar is 0.0.9000<br>
