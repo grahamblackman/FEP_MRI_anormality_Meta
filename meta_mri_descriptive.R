@@ -82,6 +82,12 @@ sprintf("Maximum proportion of female participants across studies: %.2f", prop_f
 tot_study_psych_dur <- sum(complete.cases(data_all$psychosis_duration_wks))
 sprintf("Total number of studies reporting duration of psychosis: %s", tot_study_psych_dur)
 
+# Total number of patients where duration of psychosis reported
+psych_dur_report <- data_all[ which(data_all$psychosis_duration_wks!='NA'), ]
+psych_dur_tot<-sum(psych_dur_report$fep_total)
+sprintf("Total number of patients where duration of psychosis reported: %s", psych_dur_tot)
+
+# Minimum and maximum psychosis duration
 psych_dur_min <- min(data_all$psychosis_duration_wks, na.rm=TRUE)
 sprintf("Minimum psychosis duration in weeks across studies: %.2f", psych_dur_min)
 psych_dur_max <- max(data_all$psychosis_duration_wks, na.rm=TRUE)

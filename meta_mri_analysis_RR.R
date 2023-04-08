@@ -37,14 +37,24 @@ cr_ab_RR_meta <- metabin(fep_cr_abnormal, fep_total, hc_cr_abnormal, hc_total,
 precision_cr_ab_RR_meta <- cr_ab_RR_meta$statistic
 
 
-###################  Leave one out (L1O) sensitivity analysis 
+###################  Influential study diagnostics and Leave one out (L1O) sensitivity analysis 
 
 # all abnormalities
+
+# Are there any influential studies (Yes, Khandanpour 2012)
+InfluenceAnalysis(ab_RR_meta, random = TRUE)
+
+# Leave one out sensitivity analysis
 leave1out_ab_RR_meta <- metainf(ab_RR_meta, pooled="random", sortvar=precision_ab_RR_meta)
 leave1out_ab_RR_meta
 # forest(leave1out_ab_RR_meta, layout="JAMA") 
 
 # clinically relevant abnormalities
+
+# Are there any influential studies (Yes, Sommer 2013)
+InfluenceAnalysis(cr_ab_RR_meta, random = TRUE)
+
+# Leave one out sensitivity analysis
 leave1out_cr_ab_RR_meta <- metainf(cr_ab_RR_meta, pooled="random", sortvar=precision_cr_ab_RR_meta)
 leave1out_cr_ab_RR_meta
 # forest(leave1out_cr_ab_RR_meta, layout="JAMA") 
